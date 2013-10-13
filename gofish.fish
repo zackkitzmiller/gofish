@@ -16,6 +16,8 @@ function mkgoworkspace --description "Create a new golang Workspace"
         return 1
     end
 
+    emit gofish_workspace_will_be_created
+
     set workspace_name $argv[1]
 
     set src_path "src/$GOFISH_NAMESPACE/$workspace_name"
@@ -27,6 +29,8 @@ function mkgoworkspace --description "Create a new golang Workspace"
 
     touch "$src_path/main.go"
 
+    emit gofish_workspace_created
+
     acgoworkspace $workspace_name
 end
 
@@ -37,7 +41,7 @@ function acgoworkspace --description "Activate a Go Workspace"
     end
 
     set workspace_name $argv[1]
-    set -g GO_CURRENT_WORKSPACE $workspace_name
+    set -g GOFISH_WORKSPACE $workspace_name
 
     echo "src/$GOFISH_NAMESPACE/$workspace_name"
     if not [ -d "src/$GOFISH_NAMESPACE/$workspace_name" ]
@@ -45,13 +49,19 @@ function acgoworkspace --description "Activate a Go Workspace"
         return 2
     end
 
+    emit gofish_workspace_will_activate
+
     set -g GOPATH $PWD
 
-    emit goworkspace_activated
+    emit gofish_workspace_activated
 end
 
 function degoworkspace --description "Deactivate a go workspace"
+    emit gofish_workspace_will_deactivate
+
     if set -q GOPATH
         set -e GOPATH
     end
+
+    emit gofish_workspace_deactivated
 end
