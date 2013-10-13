@@ -51,7 +51,7 @@ function acgoworkspace --description "Activate a Go Workspace"
 
     emit gofish_workspace_will_activate
 
-    set -g GOPATH $PWD
+    set -g GOPATH "$PWD/"
 
     emit gofish_workspace_activated
 end
