@@ -36,6 +36,13 @@ function acgoworkspace --description "Activate a Go Workspace"
         return 1
     end
 
+    set workspace_name $argv[1]
+
+    if not [ -d "$GOFISH_NAMESPACE/src/$workspace_name" ]
+        echo "The Go Workspace '$workspace_name' does not exist in this path"
+        return 2
+    end
+
     set -g GOPATH $PWD
 end
 
