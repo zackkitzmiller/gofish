@@ -41,7 +41,7 @@ function acgoworkspace --description "Activate a Go Workspace"
     end
 
     set workspace_name $argv[1]
-    set -g GOFISH_WORKSPACE $workspace_name
+    set -x GOFISH_WORKSPACE $workspace_name
 
     echo "src/$GOFISH_NAMESPACE/$workspace_name"
     if not [ -d "src/$GOFISH_NAMESPACE/$workspace_name" ]
@@ -51,7 +51,7 @@ function acgoworkspace --description "Activate a Go Workspace"
 
     emit gofish_workspace_will_activate
 
-    set -g GOPATH "$PWD/"
+    set -g -x GOPATH "$PWD/"
 
     emit gofish_workspace_activated
 end
