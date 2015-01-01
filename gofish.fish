@@ -23,9 +23,9 @@ function mkgoworkspace --description "Create a new golang Workspace"
     set src_path "src/$GOFISH_NAMESPACE/$workspace_name"
 
     # creating standard directories
-    mkdir "bin"
+    test -e "bin" ; and mkdir "bin"
     mkdir -p $src_path
-    mkdir "pkg"
+    test -e "pkg" ; and mkdir "pkg"
 
     touch "$src_path/main.go"
 
